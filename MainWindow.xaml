@@ -1,0 +1,94 @@
+﻿<Window x:Class="Metodichka_AIS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Metodichka_AIS"
+        mc:Ignorable="d"
+        Title="АИС" Height="450" Width="800">
+    <TabControl>
+        <TabItem Header="Пользователи" Name="usersTab" GotFocus="usersTab_GotFocus">
+            <DockPanel>
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    DockPanel.Dock="Top"
+                    Margin="8"
+                    >
+                    
+                    <Button 
+                        Content="Сохранить"
+                        Margin="0 0 8 0"
+                        Padding="8 2 8 2"
+                        Click="SaveButton_Click"
+                        />
+                    <Button 
+                        Content="Удалить"
+                        Padding="8 2 8 2"
+                        Click="DeleteButton_Click"
+                        />
+                    <Button
+                        Content="Экспорт"
+                        Padding="8 2 8 2"
+                        Margin="8 0 0 0"
+                        Click="ExportButton_Click"
+                        />
+                </StackPanel>
+
+                <DataGrid 
+                    Name="usersDG"    
+                    DockPanel.Dock="Bottom"
+                    Margin="8 0 8 8"
+                    AutoGeneratingColumn="usersDG_AutoGeneratingColumn"
+                    >
+
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+
+        <TabItem Header="Роли">
+            
+        </TabItem>
+
+        <TabItem Header="Товары">
+
+        </TabItem>
+
+        <TabItem Header="Продажи">
+            <DockPanel>
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    DockPanel.Dock="Top"
+                    Margin="8"
+                    >
+
+                    <Button 
+                        Content="Сохранить"
+                        Margin="0 0 8 0"
+                        Padding="8 2 8 2"
+                        Click="SaveButton_Click"
+                        />
+                    <Button 
+                        Content="Удалить"
+                        Padding="8 2 8 2"
+                        Click="DeleteButton_Click"
+                        />
+                    <Button
+                        Content="Экспорт"
+                        Padding="8 2 8 2"
+                        Margin="8 0 0 0"
+                        Click="ExportButton_Click"
+                        />
+                </StackPanel>
+
+                <DataGrid 
+                    Name="salesDG"    
+                    DockPanel.Dock="Bottom"
+                    Margin="8 0 8 8"
+                    AutoGeneratingColumn="usersDG_AutoGeneratingColumn"
+                    >
+
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+    </TabControl>
+</Window>
