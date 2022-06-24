@@ -94,3 +94,5 @@ C:\Users\artem\source\repos\Metodichka_AISdump\obj\Debug\net5.0-windows\Metodich
 C:\Users\artem\source\repos\Metodichka_AISdump\obj\Debug\net5.0-windows\Metodichka_AIS.genruntimeconfig.cache
 C:\Users\artem\source\repos\Metodichka_AISdump\obj\Debug\net5.0-windows\LoginWindow.g.cs
 C:\Users\artem\source\repos\Metodichka_AISdump\obj\Debug\net5.0-windows\LoginWindow.baml
+C:\Users\artem\source\repos\Metodichka_AISdump\obj\Debug\net5.0-windows\Metodichka_AIS.csproj.ResolveComReference.cache
+C:\Users\artem\source\repos\Metodichka_AISdump\obj\Debug\net5.0-windows\Interop.Microsoft.Office.Interop.Word.dll

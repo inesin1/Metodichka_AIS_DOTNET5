@@ -90,5 +90,22 @@
                 </DataGrid>
             </DockPanel>
         </TabItem>
+        <TabItem Header="Отчеты">
+            <DockPanel>
+                <StackPanel Orientation="Horizontal"
+                            DockPanel.Dock="Top"
+                            Margin="8">
+                    <Button Content="Продажи за текущий месяц"
+                            Click="ReportSalesMonthButton_Click"/>
+                </StackPanel>
+
+                <DataGrid Name="reportDG"
+                          DockPanel.Dock="Bottom"
+                          Margin="8 0 8 8"
+                          AutoGeneratingColumn="reportDG_AutoGeneratingColumn">
+                    
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
     </TabControl>
 </Window>

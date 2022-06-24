@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using Microsoft.Win32;
 using System.IO;
 using System.Reflection;
+//using Word = Microsoft.Office.Interop.Word;
 
 namespace Metodichka_AIS
 {
@@ -192,6 +193,90 @@ namespace Metodichka_AIS
         {
             _currentTable = ((TabItem)sender).Header.ToString();
             RefreshTable(_currentTable);
+        }
+
+        private void ReportSalesMonthButton_Click(object sender, RoutedEventArgs e)
+        {
+            string reportName = ((Button)sender).Content.ToString();
+
+            switch (reportName) {
+                case "Продажи за текущий месяц":
+                    ObservableCollection<Sale> salesCurMonth = new ObservableCollection<Sale>();
+
+                    _dbContext.Sales.Load();
+                    foreach (Sale sale in _dbContext.Sales.Local.ToObservableCollection()) { 
+                        if (sale.Date.Month == DateTime.Now.Month)
+                            salesCurMonth.Add(sale);
+                    }
+
+                    reportDG.ItemsSource = salesCurMonth;
+
+                    break;
+            }
+        }
+
+        private void reportDG_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            //Имя столбца
+            string headerName = e.Column.Header.ToString();
+            e.Column.IsReadOnly = true;
+
+            //Проверяем имя столбца
+            switch (headerName)
+            {
+                case "User":
+                    e.Column.Visibility = Visibility.Collapsed;
+                    break;
+                case "Product":
+                    e.Column.Visibility = Visibility.Collapsed;
+                    break;
+                case "Date":
+                    e.Column.Header = "Дата";
+                    break;
+                case "UserNavigation":
+                    e.Column.Visibility = Visibility.Collapsed;
+
+                    _dbContext.UsersMs.Load(); //Подгружаем данные из таблицы Roles
+
+                    Binding binding = new Binding(); //Создаем новый биндинг для подвязки роли
+                    binding.Path = new PropertyPath("User"); //В путь подвязки указываем поле RoleId
+
+                    //Создаем новый столбец типа ComboBox для 
+                    //возможности выбора роли и настраиваем его
+                    DataGridComboBoxColumn col = new DataGridComboBoxColumn
+                    {
+                        Header = "Пользователь", //Название столбца
+                        DisplayMemberPath = "Login", //Отображаем именно поле Name, а не ID
+                        SelectedValuePath = "Id", //А выбираем по ID
+                        ItemsSource = _dbContext.UsersMs.ToArray(), //Подвязываем эти данные в выпадающий список выбора
+                        SelectedValueBinding = binding, //Устанавливаем созданный ранее биндинг к столбцу
+                        IsReadOnly = true
+                    };
+
+                    ((DataGrid)sender).Columns.Add(col); //Добавляем созданный столбец в DataGrid
+                    break;
+                case "ProductNavigation":
+                    e.Column.Visibility = Visibility.Collapsed;
+                    _dbContext.Products.Load(); //Подгружаем данные из таблицы Roles
+
+                    Binding binding1 = new Binding(); //Создаем новый биндинг для подвязки роли
+                    binding1.Path = new PropertyPath("Product"); //В путь подвязки указываем поле RoleId
+
+                    //Создаем новый столбец типа ComboBox для 
+                    //возможности выбора роли и настраиваем его
+                    DataGridComboBoxColumn col1 = new DataGridComboBoxColumn
+                    {
+                        Header = "Товар", //Название столбца
+                        DisplayMemberPath = "Name", //Отображаем именно поле Name, а не ID
+                        SelectedValuePath = "Id", //А выбираем по ID
+                        ItemsSource = _dbContext.Products.ToArray(), //Подвязываем эти данные в выпадающий список выбора
+                        SelectedValueBinding = binding1, //Устанавливаем созданный ранее биндинг к столбцу
+                        IsReadOnly = true
+                    };
+
+                    ((DataGrid)sender).Columns.Add(col1); //Добавляем созданный столбец в DataGrid
+                    break;
+            }
         }
     }
 }
